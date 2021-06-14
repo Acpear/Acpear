@@ -45,18 +45,18 @@ class Scene003(Scene):
         self.play(GrowFromCenter(md1), GrowFromCenter(md2))
         self.wait()
         self.play(Write(v1), Write(v2), Write(m1), Write(m2), GrowArrow(v1v), GrowArrow(v2v))
-        self.wait(0.5)
+        self.wait(1)
 
         gro1 = VGroup(m1, v1, v1v, md1, ob1)
         gro2 = VGroup(m2, v2, v2v, md2, ob2)
-        self.play(gro1.animate.shift([-0.75, 0, 0]), gro2.animate.shift([-3.75, 0, 0]), rate_func=linear, run_time=0.5)
+        self.play(gro1.animate.shift([-0.75, 0, 0]), gro2.animate.shift([-3.75, 0, 0]), rate_func=linear, run_time=1)
         Law1 = Tex("$ m_{1}v_{1}+m_{2}v_{2} = m_{1}v'_{1}+m_{2}v'_{2} $")
         Law1.shift([0, -1.5, 0])
         Law2 = Tex("$\\frac{1}{2} m_{1}v_{1}^{2} + \\frac{1}{2} m_{2}v_{2}^{2} = \\frac{1}{2} m_{1}v_{1}^{'2} + "
                    "\\frac{1}{2} m_{2}v_{2}^{'2}$")
         Law2.next_to(Law1, DOWN)
         self.play(Write(Law1), Write(Law2))
-        self.wait(0.5)
+        self.wait(1)
 
         v1p = Tex("$v'_{1}=3$").next_to(md1, DOWN)
         v1vp = Vector(LEFT * 1.5)
@@ -65,54 +65,12 @@ class Scene003(Scene):
         v2vp = Vector(RIGHT * 0.5)
         v2vp.move_to(md2, LEFT)
 
-        self.play(Transform(v1, v1p), Transform(v2, v2p), Transform(v1v, v1vp), Transform(v2v, v2vp))
-        self.play(gro1.animate.shift([-25.75, 0, 0]), gro2.animate.shift([8.75, 0, 0]), rate_func=linear, run_time=4)
+        self.play(Transform(v1, v1p), Transform(v2, v2p), Transform(v1v, v1vp), Transform(v2v, v2vp), run_time=2)
+        self.play(gro1.animate.shift([-25.75, 0, 0]), gro2.animate.shift([8.75, 0, 0]), rate_func=linear, run_time=8)
         self.play(FadeOut(Law1), FadeOut(Law2))
 
 
 class Scene004(Scene):
-    def construct(self):
-        ground = Line(start=[-8, -1, 0], end=[8, -1, 0], color=BLUE)
-        ob1 = Square(2, color=GREEN)
-        ob1.shift([-1, 0, 0])
-        ob2 = Square(2, color=RED)
-        ob2.shift([4, 0, 0])
-        md1 = Dot()
-        md1.shift([-1, 0, 0])
-        md2 = Dot()
-        md2.shift([4, 0, 0])
-        m1 = Tex("$m_{1}=3$").next_to(md1, UP)
-        v1v = Vector(LEFT * 0.5)
-        v1v.move_to(md1, RIGHT)
-        v1 = Tex("$v_{1}=1$").next_to(md1, DOWN)
-        m2 = Tex("$m_{2}=1$").next_to(md2, UP)
-        v2v = Vector(LEFT * 2.5)
-        v2v.move_to(md2, RIGHT)
-        v2 = Tex("$v_{2}=5$").next_to(md2, DOWN)
-
-        self.add(ground)
-        self.add(ob1), self.add(ob2)
-        self.play(GrowFromCenter(md1), GrowFromCenter(md2))
-        self.wait()
-        self.add(v1), self.add(v2), self.add(m1), self.add(m2), self.play(GrowArrow(v1v), GrowArrow(v2v), run_time=0.1)
-        self.wait(0.2)
-
-        gro1 = VGroup(m1, v1, v1v, md1, ob1)
-        gro2 = VGroup(m2, v2, v2v, md2, ob2)
-        self.play(gro1.animate.shift([-0.75, 0, 0]), gro2.animate.shift([-3.75, 0, 0]), rate_func=linear, run_time=0.1)
-
-        v1p = Tex("$v'_{1}=3$").next_to(md1, DOWN)
-        v1vp = Vector(LEFT * 1.5)
-        v1vp.move_to(md1, RIGHT)
-        v2p = Tex("$v'_{2}=-1$").next_to(md2, DOWN)
-        v2vp = Vector(RIGHT * 0.5)
-        v2vp.move_to(md2, LEFT)
-
-        self.play(Transform(v1, v1p), Transform(v2, v2p), Transform(v1v, v1vp), Transform(v2v, v2vp), run_time=0)
-        self.play(gro1.animate.shift([-25.75, 0, 0]), gro2.animate.shift([8.75, 0, 0]), rate_func=linear, run_time=0.8)
-
-
-class Scene005(Scene):
     def construct(self):
         line1 = Text("两物块直接相撞", font="SimSun").next_to([0, 4, 0], DOWN)
         line2 = Text("因为无能量损失", font="SimSun").next_to(line1, DOWN)
@@ -139,7 +97,7 @@ class Scene005(Scene):
         self.play(Unwrite(title))
 
 
-class Scene006(GraphScene):
+class Scene005(GraphScene):
     def construct(self):
         self.x_axis_label = "$t$"
         self.y_axis_label = "$v$"
@@ -201,7 +159,7 @@ class Scene006(GraphScene):
         self.wait()
 
 
-class Scene007(GraphScene):
+class Scene006(GraphScene):
     def construct(self):
         self.x_axis_label = "$t$"
         self.y_axis_label = "$v$"
@@ -240,7 +198,7 @@ class Scene007(GraphScene):
         self.play(Uncreate(sin1), Uncreate(sin2), Unwrite(cov), Unwrite(cov2))
 
 
-class Scene008(Scene):
+class Scene007(Scene):
     def construct(self):
         first = Text("首先，算出共同速度", font="SimSun").to_edge(UP)
         cov = MathTex("v").next_to(first, RIGHT)
@@ -282,7 +240,7 @@ class Scene008(Scene):
         self.wait(1)
 
 
-class Scene009(Scene):
+class Scene008(Scene):
     def construct(self):
         tha = Text("谢谢观看！", font="SimSun", color=RED)
         self.play(Write(tha))
